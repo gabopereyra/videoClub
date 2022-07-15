@@ -20,7 +20,7 @@ import java.util.List;
 public class Borrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @CreationTimestamp
     @DateTimeFormat(pattern = "dd-MM-yyyy")
