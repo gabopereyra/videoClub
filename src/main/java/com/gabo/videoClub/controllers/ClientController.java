@@ -26,9 +26,8 @@ public class ClientController {
         Integer id = clientService.save(client).getId();
 
         ResponseInfo response = new ResponseInfo("Client created successfully.", HttpStatus.CREATED.value());
-
-        return ResponseEntity.ok()
-                .body(EntityModel.of(response, clientService.getSelfLink(id), clientService.getCollectionLink()));
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(EntityModel.of(response, clientService.getSelfLink(id), clientService.getCollectionLink()));
     }
 
     @GetMapping(value = "/{id}")
