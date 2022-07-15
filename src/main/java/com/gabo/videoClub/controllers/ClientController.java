@@ -23,7 +23,7 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<EntityModel<ResponseInfo>> createClient(@Valid @RequestBody ClientRequestDto client){
-        Long id = clientService.save(client).getId();
+        Integer id = clientService.save(client).getId();
 
         ResponseInfo response = new ResponseInfo("Client created successfully.", HttpStatus.CREATED.value());
 
@@ -32,7 +32,7 @@ public class ClientController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity getClientById(@PathVariable Long id) {
+    public ResponseEntity getClientById(@PathVariable Integer id) {
         return null;
     }
     @GetMapping
@@ -40,7 +40,7 @@ public class ClientController {
         return null;
     }
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteClientById(@PathVariable Long id){
+    public ResponseEntity deleteClientById(@PathVariable Integer id) {
         return null;
     }
 }

@@ -39,17 +39,17 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public ClientResponseDto getClientById(Long id) {
+    public ClientResponseDto getClientById(Integer id) {
         return null;
     }
 
     @Override
-    public void deleteClient(Long id) {
+    public void deleteClient(Integer id) {
 
     }
 
     @Override
-    public Link getSelfLink(Long id) {
+    public Link getSelfLink(Integer id) {
         return linkTo(methodOn(ClientController.class).getClientById(id)).withRel("Show client:");
     }
 
@@ -59,7 +59,7 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public Link getDeleteLink(Long id) {
+    public Link getDeleteLink(Integer id) {
         return linkTo(methodOn(ClientController.class).deleteClientById(id)).withRel("Delete client:");
     }
 }
