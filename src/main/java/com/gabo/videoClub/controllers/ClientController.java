@@ -32,8 +32,9 @@ public class ClientController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity getClientById(@PathVariable Integer id) {
-        return null;
+    public ResponseEntity<EntityModel<ClientResponseDto>> getClientById(@PathVariable Integer id) {
+        ClientResponseDto clientResponse = clientService.getClientById(id);
+        return ResponseEntity.ok().body(EntityModel.of(clientResponse, clientService.getCollectionLink()));
     }
     @GetMapping
     public ResponseEntity getAllClients(){

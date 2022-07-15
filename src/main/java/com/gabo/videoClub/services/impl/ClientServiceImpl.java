@@ -40,7 +40,9 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public ClientResponseDto getClientById(Integer id) {
-        return null;
+        Client client = clientRepository.findById(id).get();
+
+        return clientMapper.clientToResponseDto(client);
     }
 
     @Override
