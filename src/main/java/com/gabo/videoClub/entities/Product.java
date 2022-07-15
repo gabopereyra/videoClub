@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @SQLDelete(sql = "UPDATE product SET deleted=true WHERE id = ?")
 @Data
 @NoArgsConstructor
@@ -31,6 +31,6 @@ public abstract class Product {
 
     private Boolean deleted= false;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "products")
     List<Borrow> borrows;
 }

@@ -34,6 +34,14 @@ public class Borrow {
     private Client client;
 
     @ManyToMany
+    @JoinTable(
+            name = "rel_borrow_product",
+            joinColumns = {
+                    @JoinColumn(name = "fk_borrow", nullable = false)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name="fk_product", nullable = false)
+            })
     private List<Product> products;
 
     @Column(name = "is_over")
