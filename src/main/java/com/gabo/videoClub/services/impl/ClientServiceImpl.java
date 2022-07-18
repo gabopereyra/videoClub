@@ -2,6 +2,7 @@ package com.gabo.videoClub.services.impl;
 
 import com.gabo.videoClub.controllers.ClientController;
 import com.gabo.videoClub.dto.requests.ClientRequestDto;
+import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ClientResponseDto;
 import com.gabo.videoClub.entities.Client;
 import com.gabo.videoClub.mappers.IClientMapper;
@@ -34,8 +35,10 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public List<ClientResponseDto> getAllClients() {
-        return null;
+    public List<ClientForListDto> getAllClients() {
+        List<Client> clients = clientRepository.findAll();
+
+        return clientMapper.clientToListDto(clients);
     }
 
     @Override

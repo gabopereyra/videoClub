@@ -2,15 +2,21 @@ package com.gabo.videoClub.controllers;
 
 
 import com.gabo.videoClub.dto.requests.ClientRequestDto;
+import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ClientResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.services.IClientService;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -36,9 +42,10 @@ public class ClientController {
         return ResponseEntity.ok().body(EntityModel.of(clientResponse, clientService.getCollectionLink()));
     }
     @GetMapping
-    public ResponseEntity getAllClients(){
-        return null;
+    public ResponseEntity<List<ClientForListDto>> getAllClients(){
+        return ResponseEntity.ok().body(clientService.getAllClients());
     }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteClientById(@PathVariable Integer id) {
         return null;
