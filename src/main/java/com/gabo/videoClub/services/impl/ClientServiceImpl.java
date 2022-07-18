@@ -4,12 +4,15 @@ import com.gabo.videoClub.controllers.ClientController;
 import com.gabo.videoClub.dto.requests.ClientRequestDto;
 import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ClientResponseDto;
+import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.entities.Client;
 import com.gabo.videoClub.mappers.IClientMapper;
 import com.gabo.videoClub.repositories.IClientRepository;
 import com.gabo.videoClub.services.IClientService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,8 +52,10 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public void deleteClient(Integer id) {
-
+    public ResponseEntity<ResponseInfo> deleteClient(Integer id) {
+        clientRepository.deleteById(id);
+        ResponseInfo response = new ResponseInfo("Client deleted successfully.", HttpStatus.NO_CONTENT.value());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Override
