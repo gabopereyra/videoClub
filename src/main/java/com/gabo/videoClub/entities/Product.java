@@ -27,6 +27,7 @@ public abstract class Product {
 
     private Integer borrowQuantity = 0;
 
+    @Enumerated(value = EnumType.STRING)
     private ClasificationPerAge clasificationPerAge;
 
     private Boolean deleted= false;

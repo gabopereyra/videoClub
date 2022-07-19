@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 @SQLDelete(sql = "UPDATE movie SET deleted=true WHERE id = ?")
@@ -15,5 +17,6 @@ import javax.persistence.Entity;
 public class Movie extends Product{
     private Short duration;
 
+    @Enumerated(value = EnumType.STRING)
     private MovieStorageType movieStorageType;
 }
