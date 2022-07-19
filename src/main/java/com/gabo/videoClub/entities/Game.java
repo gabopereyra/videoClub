@@ -1,5 +1,6 @@
 package com.gabo.videoClub.entities;
 
+import com.gabo.videoClub.enums.Console;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

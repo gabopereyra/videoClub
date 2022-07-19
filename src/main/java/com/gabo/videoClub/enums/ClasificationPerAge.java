@@ -1,4 +1,4 @@
-package com.gabo.videoClub.entities;
+package com.gabo.videoClub.enums;
 
 public enum ClasificationPerAge {
     ATP("Apto para todo público", 0),

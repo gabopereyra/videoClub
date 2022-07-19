@@ -1,12 +1,12 @@
 package com.gabo.videoClub.entities;
 
+import com.gabo.videoClub.enums.ClasificationPerAge;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
