@@ -64,8 +64,11 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public MovieResponseDto getMovieById(Integer id) {
-        return null;
+    public ResponseEntity<EntityModel<MovieResponseDto>> getMovieById(Integer id) {
+        Movie movie = (Movie) movieRepository.findById(id).get();
+        MovieResponseDto movieResponseDto = movieMapper.movieToMovieResponseDto(movie);
+
+        return ResponseEntity.status(HttpStatus.OK).body(EntityModel.of(movieResponseDto, this.getCollectionLink()));
     }
 
     @Override

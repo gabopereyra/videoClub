@@ -3,7 +3,6 @@ package com.gabo.videoClub.controllers;
 import com.gabo.videoClub.dto.requests.MovieRequestDto;
 import com.gabo.videoClub.dto.responses.MovieResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
-import com.gabo.videoClub.services.IGameService;
 import com.gabo.videoClub.services.IMovieService;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +20,22 @@ public class MovieController {
        this.movieService = movieService;
     }
 
-    @PostMapping("/movies")
+    @PostMapping
     public ResponseEntity<EntityModel<ResponseInfo>> createMovie(@Valid @RequestBody MovieRequestDto movie){
         return movieService.saveMovie(movie);
     }
 
-    @GetMapping(value = "/movies/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<EntityModel<MovieResponseDto>> getMovieById(@PathVariable Integer id) {
-        return null;
+        return movieService.getMovieById(id);
     }
 
-    @GetMapping("/movies")
+    @GetMapping
     public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
         return null;
     }
 
-    @DeleteMapping(value = "/movies/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<ResponseInfo> deleteMovieById(@PathVariable Integer id) {
         return null;
     }
