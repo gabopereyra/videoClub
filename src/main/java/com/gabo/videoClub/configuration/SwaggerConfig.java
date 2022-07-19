@@ -2,8 +2,7 @@ package com.gabo.videoClub.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.*;
 import org.springframework.hateoas.client.LinkDiscoverer;
 import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
@@ -33,7 +32,7 @@ public class SwaggerConfig {
     @Bean
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .ignoredParameterTypes(InputStream.class, ResponseEntity.class, ResponseStatusException.class, StackTraceElement.class, Throwable.class, EntityModel.class, CollectionModel.class)
+                .ignoredParameterTypes(UriTemplate.class, TemplateVariable.class, Link.class, LinkRelation.class, InputStream.class, ResponseEntity.class, ResponseStatusException.class, StackTraceElement.class, Throwable.class, EntityModel.class, CollectionModel.class)
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
