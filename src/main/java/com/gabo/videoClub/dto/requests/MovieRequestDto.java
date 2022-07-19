@@ -1,7 +1,7 @@
 package com.gabo.videoClub.dto.requests;
 
-import com.gabo.videoClub.entities.ClasificationPerAge;
-import com.gabo.videoClub.entities.MovieStorageType;
+import com.gabo.videoClub.enums.ClasificationPerAge;
+import com.gabo.videoClub.enums.MovieStorageType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
