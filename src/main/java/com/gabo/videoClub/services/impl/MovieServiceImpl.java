@@ -1,5 +1,6 @@
 package com.gabo.videoClub.services.impl;
 
+import com.gabo.videoClub.controllers.MovieController;
 import com.gabo.videoClub.controllers.ProductController;
 import com.gabo.videoClub.dto.requests.MovieRequestDto;
 import com.gabo.videoClub.dto.responses.MovieForListDto;
@@ -33,17 +34,17 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     public Link getSelfLink(Integer id) {
-        return linkTo(methodOn(ProductController.class).getMovieById(id)).withRel("Show movie:");
+        return linkTo(methodOn(MovieController.class).getMovieById(id)).withRel("Show movie:");
     }
 
     @Override
     public Link getCollectionLink() {
-        return linkTo(methodOn(ProductController.class).getAllMovies()).withRel("Show all movies:");
+        return linkTo(methodOn(MovieController.class).getAllMovies()).withRel("Show all movies:");
     }
 
     @Override
     public Link getDeleteLink(Integer id) {
-        return linkTo(methodOn(ProductController.class).deleteMovieById(id)).withRel("Delete movie:");
+        return linkTo(methodOn(MovieController.class).deleteMovieById(id)).withRel("Delete movie:");
     }
 
     @Override
