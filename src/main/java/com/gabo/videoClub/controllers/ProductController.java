@@ -1,10 +1,8 @@
 package com.gabo.videoClub.controllers;
 
+import com.gabo.videoClub.dto.requests.GameRequestDto;
 import com.gabo.videoClub.dto.requests.MovieRequestDto;
-import com.gabo.videoClub.dto.responses.ClientForListDto;
-import com.gabo.videoClub.dto.responses.ClientResponseDto;
-import com.gabo.videoClub.dto.responses.MovieResponseDto;
-import com.gabo.videoClub.dto.responses.ResponseInfo;
+import com.gabo.videoClub.dto.responses.*;
 import com.gabo.videoClub.services.IGameService;
 import com.gabo.videoClub.services.IMovieService;
 import com.gabo.videoClub.services.IProductService;
@@ -37,6 +35,7 @@ public class ProductController {
     public ResponseEntity<EntityModel<MovieResponseDto>> getMovieById(@PathVariable Integer id) {
         return null;
     }
+
     @GetMapping("/movies")
     public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
         return null;
@@ -47,4 +46,23 @@ public class ProductController {
         return null;
     }
 
+    @PostMapping("/games")
+    public ResponseEntity<EntityModel<ResponseInfo>> createGame(@Valid @RequestBody GameRequestDto game){
+        return gameService.saveGame(game);
+    }
+
+    @GetMapping(value = "/games/{id}")
+    public ResponseEntity<EntityModel<GameResponseDto>> getGameById(@PathVariable Integer id) {
+        return null;
+    }
+
+    @GetMapping("/games")
+    public ResponseEntity<List<GameForListDto>> getAllGames(){
+        return null;
+    }
+
+    @DeleteMapping(value = "/games/{id}")
+    public ResponseEntity<ResponseInfo> deleteGameById(@PathVariable Integer id) {
+        return null;
+    }
 }
