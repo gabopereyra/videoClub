@@ -58,7 +58,10 @@ public class GameServiceImpl implements IGameService {
 
     @Override
     public ResponseEntity<ResponseInfo> deleteGame(Integer id) {
-        return null;
+        gameRepository.deleteById(id);
+        ResponseInfo response = new ResponseInfo("Game deleted successfully.", HttpStatus.OK.value());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 
     @Override

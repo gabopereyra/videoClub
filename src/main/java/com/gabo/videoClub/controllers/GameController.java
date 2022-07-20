@@ -38,6 +38,6 @@ public class GameController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ResponseInfo> deleteGameById(@PathVariable Integer id) {
-        return null;
+        return gameService.deleteGame(id);
     }
 }
