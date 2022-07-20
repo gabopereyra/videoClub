@@ -55,7 +55,7 @@ public class ClientServiceImpl implements IClientService {
     public ResponseEntity<ResponseInfo> deleteClient(Integer id) {
         clientRepository.deleteById(id);
         ResponseInfo response = new ResponseInfo("Client deleted successfully.", HttpStatus.NO_CONTENT.value());
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @Override
