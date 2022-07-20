@@ -75,6 +75,8 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     public ResponseEntity<ResponseInfo> deleteMovie(Integer id) {
-        return null;
+        movieRepository.deleteById(id);
+        ResponseInfo response = new ResponseInfo("Movie deleted successfully.", HttpStatus.OK.value());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Entity
-@SQLDelete(sql = "UPDATE movie SET deleted=true WHERE id = ?")
+@SQLDelete(sql = "UPDATE product SET deleted=true WHERE id = ?")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
