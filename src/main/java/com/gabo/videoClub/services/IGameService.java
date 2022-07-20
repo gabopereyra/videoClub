@@ -12,6 +12,6 @@ import java.util.List;
 public interface IGameService extends IHateoas <Integer>{
         public ResponseEntity<EntityModel<ResponseInfo>> saveGame(GameRequestDto gameRequestDto);
         public List<GameForListDto> getAllGames();
-        public GameResponseDto getGameById(Integer id);
+        public ResponseEntity<EntityModel<GameResponseDto>> getGameById(Integer id);
         public ResponseEntity<ResponseInfo> deleteGame(Integer id);
 }
