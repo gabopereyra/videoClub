@@ -33,7 +33,7 @@ public class GameController {
 
     @GetMapping
     public ResponseEntity<List<GameForListDto>> getAllGames(){
-        return null;
+        return gameService.getAllGames();
     }
 
     @DeleteMapping(value = "/{id}")
