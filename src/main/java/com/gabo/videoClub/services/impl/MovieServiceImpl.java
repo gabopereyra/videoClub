@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -59,8 +60,9 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-    public List<MovieForListDto> getAllMovies() {
-        return null;
+    public ResponseEntity<List<MovieForListDto>> getAllMovies() {
+        List<MovieForListDto> movies = movieMapper.movieToListDto(movieRepository.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(movies);
     }
 
     @Override

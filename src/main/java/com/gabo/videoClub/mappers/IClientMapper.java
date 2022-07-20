@@ -21,7 +21,7 @@ public interface IClientMapper {
     ClientResponseDto clientToResponseDto(Client client);
 
     @BeforeMapping
-    default void setTypeCar(Client client, @MappingTarget ClientForListDto ClientForListDto) {
+    default void setLink(Client client, @MappingTarget ClientForListDto ClientForListDto) {
         Integer id = client.getId();
         ClientForListDto.setLink(linkTo(methodOn(ClientController.class).getClientById(id)).toString());
     }

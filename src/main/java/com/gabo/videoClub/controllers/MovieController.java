@@ -1,6 +1,7 @@
 package com.gabo.videoClub.controllers;
 
 import com.gabo.videoClub.dto.requests.MovieRequestDto;
+import com.gabo.videoClub.dto.responses.MovieForListDto;
 import com.gabo.videoClub.dto.responses.MovieResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.services.IMovieService;
@@ -31,8 +32,8 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
-        return null;
+    public ResponseEntity<List<MovieForListDto>> getAllMovies(){
+        return movieService.getAllMovies();
     }
 
     @DeleteMapping(value = "/{id}")

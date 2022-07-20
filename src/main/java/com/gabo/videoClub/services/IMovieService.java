@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IMovieService extends IHateoas <Integer>{
     public ResponseEntity<EntityModel<ResponseInfo>> saveMovie(MovieRequestDto movieRequestDto);
-    public List<MovieForListDto> getAllMovies();
+    public ResponseEntity<List<MovieForListDto>> getAllMovies();
     public ResponseEntity<EntityModel<MovieResponseDto>> getMovieById(Integer id);
     public ResponseEntity<ResponseInfo> deleteMovie(Integer id);
 
