@@ -23,7 +23,7 @@ public interface IClientMapper {
     @BeforeMapping
     default void setTypeCar(Client client, @MappingTarget ClientForListDto ClientForListDto) {
         Integer id = client.getId();
-        ClientForListDto.setLink(linkTo(methodOn(ClientController.class).getClientById(id)).withRel("Show client:"));
+        ClientForListDto.setLink(linkTo(methodOn(ClientController.class).getClientById(id)).toString());
     }
     ClientForListDto clientToClientForListDto(Client client);
 
