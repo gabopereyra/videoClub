@@ -1,6 +1,7 @@
 package com.gabo.videoClub.controllers;
 
 import com.gabo.videoClub.dto.requests.BorrowRequestDto;
+import com.gabo.videoClub.dto.responses.BorrowResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.services.IBorrowService;
 import org.springframework.hateoas.EntityModel;
@@ -25,8 +26,8 @@ public class BorrowController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<EntityModel<?>> getBorrowById(@PathVariable Integer id) {
-        return null;
+    public ResponseEntity<EntityModel<BorrowResponseDto>> getBorrowById(@PathVariable Integer id) {
+        return borrowService.getBorrowById(id);
     }
 
     @GetMapping
