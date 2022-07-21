@@ -69,6 +69,13 @@ public class BorrowServiceImpl implements IBorrowService {
         return ResponseEntity.status(HttpStatus.OK).body(allBorrows);
     }
 
+    @Override
+    public ResponseEntity<ResponseInfo> writeOffBorrow(Integer id) {
+        borrowRepository.deleteById(id);
+        ResponseInfo response = new ResponseInfo("Borrow finished successfully.", HttpStatus.OK.value());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     private List<Product> getListOfProducts(List<Integer> idProductsNumbers){
         List<Product> products = new ArrayList<Product>();
 
@@ -92,6 +99,6 @@ public class BorrowServiceImpl implements IBorrowService {
 
     @Override
     public Link getDeleteLink(Integer id) {
-        return linkTo(methodOn(BorrowController.class).deleteBorrowById(id)).withRel("Delete borrow:");
+        return linkTo(methodOn(BorrowController.class).writeOffBorrow(id)).withRel("Write off borrow:");
     }
 }
