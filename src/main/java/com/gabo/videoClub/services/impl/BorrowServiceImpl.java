@@ -2,9 +2,7 @@ package com.gabo.videoClub.services.impl;
 
 import com.gabo.videoClub.controllers.BorrowController;
 import com.gabo.videoClub.dto.requests.BorrowRequestDto;
-import com.gabo.videoClub.dto.responses.BorrowResponseDto;
-import com.gabo.videoClub.dto.responses.GameResponseDto;
-import com.gabo.videoClub.dto.responses.ResponseInfo;
+import com.gabo.videoClub.dto.responses.*;
 import com.gabo.videoClub.entities.Borrow;
 import com.gabo.videoClub.entities.Game;
 import com.gabo.videoClub.entities.Product;
@@ -63,6 +61,12 @@ public class BorrowServiceImpl implements IBorrowService {
         BorrowResponseDto borrowResponseDto = borrowMapper.borrowToResponseDto(borrow);
 
         return ResponseEntity.status(HttpStatus.OK).body(EntityModel.of(borrowResponseDto, this.getCollectionLink()));
+    }
+
+    @Override
+    public ResponseEntity<List<BorrowForListDto>> getAllBorrows() {
+        List<BorrowForListDto> allBorrows = borrowMapper.borrowListToResponseDto(borrowRepository.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(allBorrows);
     }
 
     private List<Product> getListOfProducts(List<Integer> idProductsNumbers){

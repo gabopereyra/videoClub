@@ -1,7 +1,6 @@
 package com.gabo.videoClub.services.impl;
 
 import com.gabo.videoClub.controllers.MovieController;
-import com.gabo.videoClub.controllers.ProductController;
 import com.gabo.videoClub.dto.requests.MovieRequestDto;
 import com.gabo.videoClub.dto.responses.MovieForListDto;
 import com.gabo.videoClub.dto.responses.MovieResponseDto;
@@ -17,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
