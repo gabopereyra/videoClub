@@ -3,13 +3,9 @@ package com.gabo.videoClub.mappers;
 import com.gabo.videoClub.controllers.BorrowController;
 import com.gabo.videoClub.dto.responses.BorrowForListDto;
 import com.gabo.videoClub.dto.responses.BorrowResponseDto;
-import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ProductForListDto;
 import com.gabo.videoClub.entities.Borrow;
-import com.gabo.videoClub.entities.Client;
-import com.gabo.videoClub.entities.Product;
 import org.mapstruct.AfterMapping;
-import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -35,7 +31,7 @@ public interface IBorrowMapper {
     default void setProductsDto(Borrow borrow, @MappingTarget BorrowResponseDto borrowResponseDto) {
         List<ProductForListDto> products = borrow.getProducts()
                 .stream()
-                .map(productMapper::productToProductForList).collect(Collectors.toList());
+                .map(productMapper::productToProductForList).toList();
 
         borrowResponseDto.setProducts(products);
     }

@@ -15,7 +15,6 @@ public class SwaggerController {
 
     @GetMapping
     public ModelAndView swaggerPage(HttpServletResponse response) {
-        ModelAndView model = new ModelAndView("redirect:/swagger-ui.html");
-        return model;
+        return new ModelAndView("redirect:/swagger-ui.html");
     }
 }
