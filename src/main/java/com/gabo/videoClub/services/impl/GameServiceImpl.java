@@ -2,9 +2,10 @@ package com.gabo.videoClub.services.impl;
 
 import com.gabo.videoClub.controllers.GameController;
 import com.gabo.videoClub.dto.requests.GameRequestDto;
-import com.gabo.videoClub.dto.responses.*;
+import com.gabo.videoClub.dto.responses.GameForListDto;
+import com.gabo.videoClub.dto.responses.GameResponseDto;
+import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.entities.Game;
-import com.gabo.videoClub.entities.Movie;
 import com.gabo.videoClub.mappers.IGameMapper;
 import com.gabo.videoClub.repositories.IGameRepository;
 import com.gabo.videoClub.services.IGameService;

@@ -1,11 +1,8 @@
 package com.gabo.videoClub.mappers;
 
-import com.gabo.videoClub.controllers.ClientController;
 import com.gabo.videoClub.controllers.GameController;
 import com.gabo.videoClub.controllers.MovieController;
-import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ProductForListDto;
-import com.gabo.videoClub.entities.Client;
 import com.gabo.videoClub.entities.Game;
 import com.gabo.videoClub.entities.Movie;
 import com.gabo.videoClub.entities.Product;
