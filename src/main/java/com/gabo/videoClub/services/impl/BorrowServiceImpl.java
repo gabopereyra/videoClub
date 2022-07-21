@@ -1,0 +1,81 @@
+package com.gabo.videoClub.services.impl;
+
+import com.gabo.videoClub.controllers.BorrowController;
+import com.gabo.videoClub.dto.requests.BorrowRequestDto;
+import com.gabo.videoClub.dto.responses.ResponseInfo;
+import com.gabo.videoClub.entities.Borrow;
+import com.gabo.videoClub.entities.Product;
+import com.gabo.videoClub.mappers.IBorrowMapper;
+import com.gabo.videoClub.repositories.IBorrowRepository;
+import com.gabo.videoClub.repositories.IClientRepository;
+import com.gabo.videoClub.repositories.IProductRepository;
+import com.gabo.videoClub.services.IBorrowService;
+import org.mapstruct.factory.Mappers;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+@Service
+public class BorrowServiceImpl implements IBorrowService {
+    private IBorrowRepository borrowRepository;
+
+    private IProductRepository productRepository;
+
+    private IClientRepository clientRepository;
+
+    public BorrowServiceImpl(IBorrowRepository borrowRepository, IProductRepository productRepository, IClientRepository clientRepository) {
+        this.borrowRepository = borrowRepository;
+        this.productRepository = productRepository;
+        this.clientRepository = clientRepository;
+    }
+
+    IBorrowMapper borrowMapper = Mappers.getMapper(IBorrowMapper.class);
+
+    @Override
+    public ResponseEntity<EntityModel<ResponseInfo>> createBorrow(BorrowRequestDto borrowRequestDto) {
+        Borrow borrow = new Borrow();
+        borrow.setClient(clientRepository.findById(borrowRequestDto.getId_client()).get());
+        borrow.setProducts(getListOfProducts(borrowRequestDto.getProducts()));
+        borrow.setFinalizationDate(borrow.getInitialDate().plusDays(7L));
+
+        Integer id = borrowRepository.save(borrow).getId();
+
+        ResponseInfo response = new ResponseInfo("Borrow created successfully. Date of finalization: "+borrow.getFinalizationDate(), HttpStatus.CREATED.value());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(EntityModel.of(response, this.getSelfLink(id), this.getCollectionLink()));
+    }
+
+    private List<Product> getListOfProducts(List<Integer> idProductsNumbers){
+        List<Product> products = new ArrayList<Product>();
+
+        for (Integer idProduct: idProductsNumbers) {
+            products.add(productRepository.findById(idProduct).get());
+        }
+
+        return products;
+    }
+
+
+    @Override
+    public Link getSelfLink(Integer id) {
+        return linkTo(methodOn(BorrowController.class).getBorrowById(id)).withRel("Show borrow:");
+    }
+
+    @Override
+    public Link getCollectionLink() {
+        return linkTo(methodOn(BorrowController.class).getAllBorrows()).withRel("Show all borrows:");
+    }
+
+    @Override
+    public Link getDeleteLink(Integer id) {
+        return linkTo(methodOn(BorrowController.class).deleteBorrowById(id)).withRel("Delete borrow:");
+    }
+}

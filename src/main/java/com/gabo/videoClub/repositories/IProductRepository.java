@@ -3,7 +3,8 @@ package com.gabo.videoClub.repositories;
 import com.gabo.videoClub.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
-@NoRepositoryBean
+@Repository
 public interface IProductRepository extends JpaRepository<Product, Integer> {
 }

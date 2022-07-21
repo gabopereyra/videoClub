@@ -22,9 +22,8 @@ public class Borrow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @CreationTimestamp
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate initialDate;
+    private LocalDate initialDate = LocalDate.now();
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate finalizationDate;
