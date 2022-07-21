@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@SQLDelete(sql = "UPDATE movie SET is_over=true WHERE id = ?")
+@SQLDelete(sql = "UPDATE borrow SET is_over=true WHERE id = ?")
+@Where(clause = "is_over = false")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -37,8 +37,8 @@ public class BorrowController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<ResponseInfo> deleteBorrowById(@PathVariable Integer id) {
-        return null;
+    public ResponseEntity<ResponseInfo> writeOffBorrow(@PathVariable Integer id) {
+        return borrowService.writeOffBorrow(id);
     }
 
 }
