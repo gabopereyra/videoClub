@@ -2,8 +2,11 @@ package com.gabo.videoClub.services.impl;
 
 import com.gabo.videoClub.controllers.BorrowController;
 import com.gabo.videoClub.dto.requests.BorrowRequestDto;
+import com.gabo.videoClub.dto.responses.BorrowResponseDto;
+import com.gabo.videoClub.dto.responses.GameResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.entities.Borrow;
+import com.gabo.videoClub.entities.Game;
 import com.gabo.videoClub.entities.Product;
 import com.gabo.videoClub.mappers.IBorrowMapper;
 import com.gabo.videoClub.repositories.IBorrowRepository;
@@ -37,7 +40,7 @@ public class BorrowServiceImpl implements IBorrowService {
         this.clientRepository = clientRepository;
     }
 
-    IBorrowMapper borrowMapper = Mappers.getMapper(IBorrowMapper.class);
+    private IBorrowMapper borrowMapper = Mappers.getMapper(IBorrowMapper.class);
 
     @Override
     public ResponseEntity<EntityModel<ResponseInfo>> createBorrow(BorrowRequestDto borrowRequestDto) {
@@ -51,6 +54,15 @@ public class BorrowServiceImpl implements IBorrowService {
         ResponseInfo response = new ResponseInfo("Borrow created successfully. Date of finalization: "+borrow.getFinalizationDate(), HttpStatus.CREATED.value());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(EntityModel.of(response, this.getSelfLink(id), this.getCollectionLink()));
+    }
+
+    @Override
+    public ResponseEntity<EntityModel<BorrowResponseDto>> getBorrowById(Integer id) {
+        Borrow borrow = borrowRepository.findById(id).get();
+
+        BorrowResponseDto borrowResponseDto = borrowMapper.borrowToResponseDto(borrow);
+
+        return ResponseEntity.status(HttpStatus.OK).body(EntityModel.of(borrowResponseDto, this.getCollectionLink()));
     }
 
     private List<Product> getListOfProducts(List<Integer> idProductsNumbers){
