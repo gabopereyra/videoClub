@@ -10,6 +10,7 @@ import com.gabo.videoClub.mappers.IClientMapper;
 import com.gabo.videoClub.repositories.IClientRepository;
 import com.gabo.videoClub.services.IClientService;
 import org.mapstruct.factory.Mappers;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +32,15 @@ public class ClientServiceImpl implements IClientService {
     IClientMapper clientMapper = Mappers.getMapper(IClientMapper.class);
 
     @Override
-    public ClientResponseDto save(ClientRequestDto clientDto) {
-        Client saved = clientRepository.save(clientMapper.requestToClient(clientDto));
+    public ResponseEntity<EntityModel<ResponseInfo>> save(ClientRequestDto clientDto) {
+        Client client = clientMapper.requestToClient(clientDto);
 
-        return clientMapper.clientToResponseDto(saved);
-    }
+        Integer id = clientRepository.save(client).getId();
+
+        ResponseInfo response = new ResponseInfo("CLient created successfully.", HttpStatus.CREATED.value());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(EntityModel.of(response, this.getSelfLink(id), this.getCollectionLink()));
+     }
 
     @Override
     public List<ClientForListDto> getAllClients() {
@@ -45,10 +50,12 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public ClientResponseDto getClientById(Integer id) {
+    public ResponseEntity<EntityModel<ClientResponseDto>> getClientById(Integer id) {
         Client client = clientRepository.findById(id).get();
 
-        return clientMapper.clientToResponseDto(client);
+        ClientResponseDto clientResponse = clientMapper.clientToResponseDto(client);
+
+        return ResponseEntity.ok().body(EntityModel.of(clientResponse, this.getCollectionLink()));
     }
 
     @Override

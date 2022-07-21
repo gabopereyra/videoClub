@@ -25,18 +25,14 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<EntityModel<ResponseInfo>> createClient(@Valid @RequestBody ClientRequestDto client){
-        Integer id = clientService.save(client).getId();
-
-        ResponseInfo response = new ResponseInfo("Client created successfully.", HttpStatus.CREATED.value());
-        
-        return ResponseEntity.status(HttpStatus.CREATED).body(EntityModel.of(response, clientService.getSelfLink(id), clientService.getCollectionLink()));
+        return clientService.save(client);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<EntityModel<ClientResponseDto>> getClientById(@PathVariable Integer id) {
-        ClientResponseDto clientResponse = clientService.getClientById(id);
-        return ResponseEntity.ok().body(EntityModel.of(clientResponse, clientService.getCollectionLink()));
+        return clientService.getClientById(id);
     }
+
     @GetMapping
     public ResponseEntity<List<ClientForListDto>> getAllClients(){
         return ResponseEntity.ok().body(clientService.getAllClients());
