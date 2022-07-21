@@ -1,6 +1,7 @@
 package com.gabo.videoClub.controllers;
 
 import com.gabo.videoClub.dto.requests.BorrowRequestDto;
+import com.gabo.videoClub.dto.responses.BorrowForListDto;
 import com.gabo.videoClub.dto.responses.BorrowResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
 import com.gabo.videoClub.services.IBorrowService;
@@ -31,8 +32,8 @@ public class BorrowController {
     }
 
     @GetMapping
-    public ResponseEntity<List<?>> getAllBorrows(){
-        return null;
+    public ResponseEntity<List<BorrowForListDto>> getAllBorrows(){
+        return borrowService.getAllBorrows();
     }
 
     @DeleteMapping(value = "/{id}")
