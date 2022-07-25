@@ -5,9 +5,11 @@ import com.gabo.videoClub.dto.requests.ClientRequestDto;
 import com.gabo.videoClub.dto.responses.ClientForListDto;
 import com.gabo.videoClub.dto.responses.ClientResponseDto;
 import com.gabo.videoClub.dto.responses.ResponseInfo;
+import com.gabo.videoClub.entities.Borrow;
 import com.gabo.videoClub.entities.Client;
 import com.gabo.videoClub.mappers.IClientMapper;
 import com.gabo.videoClub.repositories.IClientRepository;
+import com.gabo.videoClub.services.IBorrowService;
 import com.gabo.videoClub.services.IClientService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.hateoas.EntityModel;
@@ -25,8 +27,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ClientServiceImpl implements IClientService {
     private IClientRepository clientRepository;
 
-    public ClientServiceImpl(IClientRepository clientRepository){
+    private IBorrowService borrowService;
+
+    public ClientServiceImpl(IClientRepository clientRepository, IBorrowService borrowService) {
         this.clientRepository = clientRepository;
+        this.borrowService = borrowService;
     }
 
     IClientMapper clientMapper = Mappers.getMapper(IClientMapper.class);
@@ -60,6 +65,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public ResponseEntity<ResponseInfo> deleteClient(Integer id) {
+        deleteRelatedBorrows(id);
         clientRepository.deleteById(id);
         ResponseInfo response = new ResponseInfo("Client deleted successfully.", HttpStatus.OK.value());
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -78,5 +84,9 @@ public class ClientServiceImpl implements IClientService {
     @Override
     public Link getDeleteLink(Integer id) {
         return linkTo(methodOn(ClientController.class).deleteClientById(id)).withRel("Delete client:");
+    }
+
+    private void deleteRelatedBorrows(Integer id) {
+        borrowService.deleteRelatedBorrow(id);
     }
 }
