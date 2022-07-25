@@ -14,4 +14,5 @@ public interface IBorrowService extends IHateoas <Integer>{
     public ResponseEntity<EntityModel<BorrowResponseDto>> getBorrowById(Integer id);
     public ResponseEntity<List<BorrowForListDto>> getAllBorrows();
     public ResponseEntity<ResponseInfo> writeOffBorrow(Integer id);
+    public void deleteRelatedBorrow(Integer id);
 }

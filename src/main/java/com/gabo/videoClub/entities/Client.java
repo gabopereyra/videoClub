@@ -37,6 +37,6 @@ public class Client {
 
     private Boolean blockedForBorrow = false;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "client")
     List<Borrow> borrows;
 }
