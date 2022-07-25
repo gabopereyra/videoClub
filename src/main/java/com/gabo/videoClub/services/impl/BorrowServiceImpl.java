@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,8 +72,9 @@ public class BorrowServiceImpl implements IBorrowService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseInfo> writeOffBorrow(Integer id) {
-        borrowRepository.deleteById(id);
+        borrowRepository.deletedBorrowById(id);
         ResponseInfo response = new ResponseInfo("Borrow finished successfully.", HttpStatus.OK.value());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -101,5 +103,11 @@ public class BorrowServiceImpl implements IBorrowService {
     @Override
     public Link getDeleteLink(Integer id) {
         return linkTo(methodOn(BorrowController.class).writeOffBorrow(id)).withRel("Write off borrow:");
+    }
+
+    @Override
+    @Transactional
+    public void deleteRelatedBorrow(Integer id) {
+        borrowRepository.deletedBorrowByClientId(id);
     }
 }
